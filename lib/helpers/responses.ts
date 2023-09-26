@@ -1,15 +1,17 @@
 import { NextResponse } from "next/server";
 
 export const generateSuccessMessage = (data: any, status: number) => {
-  return NextResponse.json(
-    { message: "Success", ...data },
-    { status, statusText: "OK" }
-  );
+  return generateResponse(data, status, "Success");
 };
 
 export const generateErrorMessage = (data: any, status: number) => {
-  return NextResponse.json(
-    { message: "Error", ...data },
-    { status, statusText: "Error" }
-  );
+  return generateResponse(data, status, "Error");
+};
+
+export const generateResponse = (
+  data: any,
+  status: number,
+  statusText: string
+) => {
+  return NextResponse.json({ message: statusText, ...data }, { status });
 };
