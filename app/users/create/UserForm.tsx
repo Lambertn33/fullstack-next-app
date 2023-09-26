@@ -33,26 +33,28 @@ const TicketForm = () => {
       lastname: user.lastname,
     };
 
-    try {
-      await createUser(newUser);
-      router.refresh();
-      router.push("/users");
-    } catch (error) {
-      console.log(error);
-    }
+    await createUser(newUser);
+    router.refresh();
+    router.push("/users");
   };
 
   return (
     <form className="w-1/2" onSubmit={createUserHandler}>
       <label>username</label>
       <input
+        required
         type="text"
+        minLength={6}
+        maxLength={28}
         value={user.username}
         onChange={(e) => inputChangedHandler("username", e.target.value)}
       />
 
       <label>first name</label>
       <input
+        required
+        minLength={2}
+        maxLength={50}
         type="text"
         value={user.firstname}
         onChange={(e) => inputChangedHandler("firstname", e.target.value)}
@@ -60,6 +62,9 @@ const TicketForm = () => {
 
       <label>last name</label>
       <input
+        required
+        minLength={2}
+        maxLength={50}
         type="text"
         value={user.lastname}
         onChange={(e) => inputChangedHandler("lastname", e.target.value)}
