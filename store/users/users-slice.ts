@@ -1,5 +1,10 @@
-import { createSlice, AnyAction, ThunkDispatch, PayloadAction } from "@reduxjs/toolkit";
-import { getUsers } from "@/services/users.services";
+import {
+  createSlice,
+  AnyAction,
+  ThunkDispatch,
+  PayloadAction,
+} from "@reduxjs/toolkit";
+import { getUsers, deleteUser as deleteUserService } from "@/services/users.services";
 import { UserInterface } from "@/interfaces/users.interface";
 
 interface UserState {
@@ -30,10 +35,31 @@ const usersSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    deleteUserPending: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    deleteUserFulfilled: (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.users = state.users!.filter(
+        (user) => user.id !== action.payload.id
+      );
+    },
+    deleteUserRejected: (state, action: PayloadAction<string>) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { fetchUsersPending, fetchUsersFulfilled, fetchUsersRejected } = usersSlice.actions;
+export const {
+  fetchUsersPending,
+  fetchUsersFulfilled,
+  fetchUsersRejected,
+  deleteUserFulfilled,
+  deleteUserPending,
+  deleteUserRejected,
+} = usersSlice.actions;
 
 export default usersSlice.reducer;
 
@@ -47,4 +73,20 @@ export const fetchUsers =
     } catch (error: any) {
       dispatch(fetchUsersRejected(error.message));
     }
-  }
+  };
+
+export const deleteUser =
+  (userId: string) =>
+  async (
+    
+    dispatch: ThunkDispatch<UserState, void, AnyAction>
+  ) => {
+    dispatch(deleteUserPending());
+
+    try {
+      const data = await deleteUserService(userId);
+      dispatch(deleteUserFulfilled(userId));
+    } catch (error: any) {
+      dispatch(deleteUserRejected(error.message));
+    }
+  };

@@ -1,5 +1,5 @@
 import React from "react";
-import UserForm from "@/components/users/UserForm";
+import UserForm from "@/app/users/create/UserForm";
 import Link from "next/link";
 
 const CreateUser = () => {

@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import UsersList from "@/components/users/UsersList";
+import UsersList from "@/app/users/UsersList";
 import Loading from "./loading";
 import Link from "next/link";
 
