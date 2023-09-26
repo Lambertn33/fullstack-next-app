@@ -15,7 +15,7 @@ const initialState: UserState = {
 };
 
 const usersSlice = createSlice({
-  name: "user",
+  name: "users",
   initialState,
   reducers: {
     fetchUsersPending: (state) => {

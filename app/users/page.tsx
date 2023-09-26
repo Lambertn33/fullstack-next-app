@@ -1,24 +1,21 @@
-import React, {Suspense} from 'react'
-import UsersList from '@/components/users/UsersList'
-import Loading from './loading'
+import React, { Suspense } from "react";
+import UsersList from "@/components/users/UsersList";
+import Loading from "./loading";
+import Link from "next/link";
 
 const Users = () => {
   return (
     <main>
-     <nav>
-        <div>
-          <h2>Users</h2>
-          <p>
-            <small>Currently available users</small>
-          </p>
-        </div>
-      </nav>
+      <div className="flex items-center justify-between">
+        <h2>New User</h2>
+        <Link href="/users/create">Create New</Link>
+      </div>
 
-        <Suspense fallback={<Loading />}>
+      <Suspense fallback={<Loading />}>
         <UsersList />
-        </Suspense>
+      </Suspense>
     </main>
-  )
-}
+  );
+};
 
-export default Users
+export default Users;
