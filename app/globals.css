@@ -43,3 +43,22 @@ nav a:hover {
 main nav {
   @apply border-0;
 }
+
+/*Card */
+.card {
+  @apply 
+    bg-white 
+    shadow-sm 
+    rounded-md 
+    py-3 px-4 my-4 
+    relative 
+    overflow-hidden;
+}
+.card h3 {
+  @apply 
+    font-bold text-gray-700 text-sm 
+    mb-0;
+}
+.card p {
+  @apply my-4 text-sm leading-6;
+}
