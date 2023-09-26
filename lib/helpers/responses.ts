@@ -6,3 +6,10 @@ export const generateSuccessMessage = (data: any, status: number) => {
     { status, statusText: "OK" }
   );
 };
+
+export const generateErrorMessage = (data: any, status: number) => {
+  return NextResponse.json(
+    { message: "Error", ...data },
+    { status, statusText: "Error" }
+  );
+};
